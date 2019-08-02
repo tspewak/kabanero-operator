@@ -38,6 +38,8 @@ spec:
                     properties:
                       name:
                         type: string
+                      skipFeaturedCollectionsInstall:
+                        type: boolean
                       url:
                         type: string
                     type: object

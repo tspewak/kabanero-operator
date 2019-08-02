@@ -31,6 +31,7 @@ type InstanceCollectionConfig struct {
 type RepositoryConfig struct {
 	Name string `json:"name,omitempty"`
 	Url  string `json:"url,omitempty"`
+	SkipFeaturedCollectionsInstall bool `json:"skipFeaturedCollectionsInstall,omitempty"`
 }
 
 type TektonCustomizationSpec struct {

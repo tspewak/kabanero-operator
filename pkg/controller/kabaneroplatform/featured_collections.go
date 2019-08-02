@@ -55,18 +55,20 @@ func featuredCollections(k *kabanerov1alpha1.Kabanero) ([]*collection.Collection
 
 	if k.Spec.Collections.EnableFeatured {
 		for _, r := range k.Spec.Collections.Repositories {
-			index, err := collection.ResolveIndex(r.Url)
-			if err != nil {
-				return nil, err
-			}
-
-			for _, c := range index.ListCollections() {
-				c, err := collection.ResolveCollection(c.CollectionUrls...)
+			if ! r.SkipFeaturedCollectionsInstall {
+				index, err := collection.ResolveIndex(r.Url)
 				if err != nil {
 					return nil, err
 				}
 
-				collections = append(collections, c)
+				for _, c := range index.ListCollections() {
+					c, err := collection.ResolveCollection(c.CollectionUrls...)
+					if err != nil {
+						return nil, err
+					}
+
+					collections = append(collections, c)
+				}
 			}
 		}
 	}
